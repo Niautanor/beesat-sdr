@@ -22,9 +22,10 @@ FIND_LIBRARY(
           /usr/local/lib64
           /usr/lib
           /usr/lib64
-)
+          )
+
+include("${CMAKE_CURRENT_LIST_DIR}/tnc_nxTarget.cmake")
 
 INCLUDE(FindPackageHandleStandardArgs)
 FIND_PACKAGE_HANDLE_STANDARD_ARGS(TNC_NX DEFAULT_MSG TNC_NX_LIBRARIES TNC_NX_INCLUDE_DIRS)
 MARK_AS_ADVANCED(TNC_NX_LIBRARIES TNC_NX_INCLUDE_DIRS)
-

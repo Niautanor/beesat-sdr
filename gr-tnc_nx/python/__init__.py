@@ -22,16 +22,16 @@
 This is the GNU Radio TNC_NX module. Place your Python package
 description here (python/__init__.py).
 '''
+from __future__ import unicode_literals
 
 # import swig generated symbols into the tnc_nx namespace
 try:
-	# this might fail if the module is python-only
-	from tnc_nx_swig import *
+    # this might fail if the module is python-only
+    from .tnc_nx_swig import *
 except ImportError:
-	pass
+    pass
 
 # import any pure python here
 #
-from signal_demodulator import *
-from beesat_classifier import beesat_classifier
-
+from .signal_demodulator import *
+from .beesat_classifier import beesat_classifier

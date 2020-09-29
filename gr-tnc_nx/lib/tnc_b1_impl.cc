@@ -85,7 +85,7 @@ namespace gr {
      * TIMER HANDLER *
      *****************/
     void tnc_b1_impl::handle_timeout(const boost::system::error_code& ec) {
-      if (ec == 0) {
+      if (!ec) {
         std::cout << "TM Timeout" << std::endl;
         message_port_pub(pmt::mp("Output"), g.out_ack(SAT_NOK));
         set_idle();

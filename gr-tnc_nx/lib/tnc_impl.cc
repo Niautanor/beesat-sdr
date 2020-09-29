@@ -91,7 +91,7 @@ tnc_impl::~tnc_impl() {
  * TIMEOUT HANDLER *
  *******************/
 void tnc_impl::handle_timeout(const boost::system::error_code& ec) {
-  if (ec == 0) {
+  if (!ec) {
     switch (p_state) {
 
       case wait_msg:
