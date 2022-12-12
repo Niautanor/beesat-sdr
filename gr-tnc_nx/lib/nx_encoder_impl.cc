@@ -45,8 +45,7 @@ namespace gr {
     nx_encoder::sptr
     nx_encoder::make()
     {
-      return gnuradio::get_initial_sptr
-        (new nx_encoder_impl());
+        return gnuradio::make_block_sptr<nx_encoder_impl>();
     }
 
     /*
@@ -65,7 +64,7 @@ namespace gr {
     	 ********************************/
       // INPUT
       message_port_register_in(pmt::mp("in"));
-      set_msg_handler(pmt::mp("in"), boost::bind(&nx_encoder_impl::handle_msg, this, _1));
+      set_msg_handler(pmt::mp("in"), [this](auto&& arg) { return handle_msg(arg); });
       // OUTPUT (single / double baudrate)
       message_port_register_out(pmt::mp("single"));
       message_port_register_out(pmt::mp("double"));

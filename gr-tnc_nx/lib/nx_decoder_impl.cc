@@ -30,9 +30,11 @@
 namespace gr {
   namespace tnc_nx {
 
+    using input_type = uint8_t;
+
     nx_decoder::sptr
     nx_decoder::make(int framesync, bool beesat_mode) {
-      return gnuradio::get_initial_sptr(new nx_decoder_impl(framesync, beesat_mode));
+        return gnuradio::make_block_sptr<nx_decoder_impl>(framesync, beesat_mode);
     }
 
     /*
@@ -40,7 +42,7 @@ namespace gr {
      */
     nx_decoder_impl::nx_decoder_impl(int framesync, bool beesat_mode)
     : gr::block("NX Decoder",
-                 gr::io_signature::make(1, 1, sizeof (char)),
+                 gr::io_signature::make(1, 1, sizeof(input_type)),
                  gr::io_signature::make(0, 0, 0)),
                  d_off(0), header(0), state(SEARCH),
                  rx(), fr(&rx), d_framesync(framesync), d_beesat_mode(beesat_mode) {
@@ -114,7 +116,7 @@ namespace gr {
             gr_vector_int &ninput_items,
             gr_vector_const_void_star &input_items,
             gr_vector_void_star &output_items) {
-      const uint8_t *in = (const uint8_t *) input_items[0];
+      auto in = static_cast<const input_type*>(input_items[0]);
 
       for (int i = 104; i < (noutput_items + 104); ++i) {
 

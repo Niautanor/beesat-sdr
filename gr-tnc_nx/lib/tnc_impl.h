@@ -24,9 +24,9 @@
 #define INCLUDED_TNC_NX_TNC_IMPL_H
 
 // TNC-NX Module
-#include <tnc_nx/tnc.h>
-#include <tnc_nx/nx_protocol.h>
-#include <tnc_nx/gscf_com.h>
+#include <gnuradio/tnc_nx/tnc.h>
+#include <gnuradio/tnc_nx/nx_protocol.h>
+#include <gnuradio/tnc_nx/gscf_com.h>
 
 // C++
 #include <iostream>
@@ -34,7 +34,7 @@
 
 // GNURADIO
 #include <gnuradio/blocks/api.h>
-#include <gnuradio/blocks/pdu.h>
+#include <gnuradio/pdu.h>
 
 // BOOST
 #include <boost/bind.hpp>

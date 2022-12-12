@@ -26,12 +26,12 @@
 #ifndef INCLUDED_TNC_NX_NX_ENCODER_IMPL_H
 #define INCLUDED_TNC_NX_NX_ENCODER_IMPL_H
 
-#include <tnc_nx/nx_encoder.h>
-#include <tnc_nx/mobitex_coding.h>
-#include <tnc_nx/frame_composer.h>
-#include <tnc_nx/nx_protocol.h>
+#include <gnuradio/tnc_nx/nx_encoder.h>
+#include <gnuradio/tnc_nx/mobitex_coding.h>
+#include <gnuradio/tnc_nx/frame_composer.h>
+#include <gnuradio/tnc_nx/nx_protocol.h>
 
-#include <gnuradio/blocks/pdu.h>
+#include <gnuradio/pdu.h>
 
 namespace gr {
   namespace tnc_nx {

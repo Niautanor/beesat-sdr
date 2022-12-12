@@ -25,7 +25,7 @@
 #ifndef INCLUDED_TEST_BLOCKS_SLOPE_DETECT_IMPL_H
 #define INCLUDED_TEST_BLOCKS_SLOPE_DETECT_IMPL_H
 
-#include <tnc_nx/local_extrema_detect.h>
+#include <gnuradio/tnc_nx/local_extrema_detect.h>
 
 namespace gr {
   namespace tnc_nx {

@@ -29,7 +29,7 @@ outputs:
     vlen: 1
 
 templates:
-    imports: import tnc_nx
+    imports: from gnuradio import tnc_nx
     make: "tnc_nx.signal_demodulator(\n\tdc_block_len=${dc_block_len},\n\tsamp_per_sym=${samp_per_sym},\n\
         \trx_bit_inv=${rx_bit_inv},\n)"
     callbacks:

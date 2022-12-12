@@ -31,7 +31,7 @@
 #include "config.h"
 #endif
 
-#include <tnc_nx/mobitex_coding.h>
+#include <gnuradio/tnc_nx/mobitex_coding.h>
 
 #define GEN_POLY_CS 	0x1021
 #define GEN_POLY_X25	0x8408

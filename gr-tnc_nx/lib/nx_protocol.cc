@@ -23,7 +23,7 @@
  * 
  */
 
-#include <tnc_nx/nx_protocol.h>
+#include <gnuradio/tnc_nx/nx_protocol.h>
 
 namespace gr{
 	namespace tnc_nx {

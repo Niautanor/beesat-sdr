@@ -23,14 +23,13 @@
 #ifndef INCLUDED_TNC_NX_TNC_B1_IMPL_H
 #define INCLUDED_TNC_NX_TNC_B1_IMPL_H
 
-#include <tnc_nx/tnc_b1.h>
-#include <tnc_nx/gscf_com.h>
-#include <tnc_nx/b1_protocol.h>
-#include <tnc_nx/frame_composer.h>
-#include <tnc_nx/mobitex_coding.h>
+#include <gnuradio/tnc_nx/tnc_b1.h>
+#include <gnuradio/tnc_nx/gscf_com.h>
+#include <gnuradio/tnc_nx/b1_protocol.h>
+#include <gnuradio/tnc_nx/frame_composer.h>
+#include <gnuradio/tnc_nx/mobitex_coding.h>
 
 // BOOST
-#include <boost/bind.hpp>
 #include <boost/thread.hpp>
 #include <boost/asio.hpp>
 
@@ -63,11 +62,11 @@ namespace gr {
 	    void run_timer() {ios.run();}
 	    void start_timer(int ms) {
 	    	timer->expires_from_now(boost::posix_time::milliseconds(ms));
-	    	timer->async_wait(boost::bind(&gr::tnc_nx::tnc_b1_impl::handle_timeout, this, _1));
+	    	timer->async_wait([this](auto&& arg) { return handle_timeout(arg); });
 	    }
 	    void idle_timer() {
 	    	timer->expires_from_now(boost::posix_time::pos_infin);
-	    	timer->async_wait(boost::bind(&gr::tnc_nx::tnc_b1_impl::handle_infinite_timeout, this, _1));
+	    	timer->async_wait([this](auto&& arg) { return handle_infinite_timeout(arg); });
 	    }
 	    void handle_timeout(const boost::system::error_code& ec);
 	    void handle_infinite_timeout(const boost::system::error_code& ec){

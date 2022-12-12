@@ -24,7 +24,7 @@
 #include "config.h"
 #endif
 
-#include <tnc_nx/gscf_com.h>
+#include <gnuradio/tnc_nx/gscf_com.h>
 
 namespace gr {
   namespace tnc_nx {

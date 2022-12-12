@@ -57,17 +57,17 @@ tnc_impl::tnc_impl()
    ******************/
   message_port_register_out(pmt::mp("TX"));
   message_port_register_in(pmt::mp("Input"));
-  set_msg_handler(pmt::mp("Input"), boost::bind(&tnc_impl::handle_msg_input, this, _1));
+  set_msg_handler(pmt::mp("Input"), [this](auto&& arg) { return handle_msg_input(arg); });
   message_port_register_out(pmt::mp("Output"));
   message_port_register_in(pmt::mp("RX"));
-  set_msg_handler(pmt::mp("RX"), boost::bind(&tnc_impl::handle_msg_rx, this, _1));
+  set_msg_handler(pmt::mp("RX"), [this](auto&& arg) { return handle_msg_rx(arg); });
 
   /*********************
    * INIT TIMER THREAD *
    *********************/
   timer = new boost::asio::deadline_timer(ios);
   timer->expires_from_now(boost::posix_time::pos_infin);
-  timer->async_wait(boost::bind(&tnc_impl::handle_infinite_timeout, this, _1));
+  timer->async_wait([this](auto&& arg) { return handle_infinite_timeout(arg); });
   thr = new boost::thread(&tnc_impl::run_timer, this);
 
   /***********************

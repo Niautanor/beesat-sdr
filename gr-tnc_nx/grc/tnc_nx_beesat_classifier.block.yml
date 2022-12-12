@@ -20,7 +20,7 @@ outputs:
     optional: true
 
 templates:
-    imports: import tnc_nx
+    imports: from gnuradio import tnc_nx
     make: tnc_nx.beesat_classifier()
 
 file_format: 1

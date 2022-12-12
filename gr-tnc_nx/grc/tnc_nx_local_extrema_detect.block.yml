@@ -27,7 +27,7 @@ outputs:
     dtype: float
 
 templates:
-    imports: import tnc_nx
+    imports: from gnuradio import tnc_nx
     make: tnc_nx.local_extrema_detect(${hist}, ${threshold}, ${range})
     callbacks:
     - set_hist(${hist})

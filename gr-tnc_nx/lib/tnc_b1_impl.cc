@@ -20,29 +20,27 @@
  * Boston, MA 02110-1301, USA.
  */
 
-#ifdef HAVE_CONFIG_H
-#include "config.h"
-#endif
-
-#include <gnuradio/io_signature.h>
 #include "tnc_b1_impl.h"
+#include <gnuradio/io_signature.h>
 
 namespace gr {
   namespace tnc_nx {
 
+    using input_type = uint8_t;
+
     tnc_b1::sptr
     tnc_b1::make()
     {
-      return gnuradio::get_initial_sptr
-        (new tnc_b1_impl());
+      return gnuradio::make_block_sptr<tnc_b1_impl>();
     }
+
 
     /*
      * The private constructor
      */
     tnc_b1_impl::tnc_b1_impl()
       : gr::block("TNC BEESAT-1",
-              gr::io_signature::make(1, 1, sizeof(char)),
+              gr::io_signature::make(1, 1, sizeof(input_type)),
               gr::io_signature::make(0, 0, 0)),
               d_off(0),
               header(0),
@@ -56,7 +54,7 @@ namespace gr {
        * INIT I/O-PORTS *
        ******************/
       message_port_register_in(pmt::mp("Input"));
-      set_msg_handler(pmt::mp("Input"), boost::bind(&tnc_b1_impl::handle_msg_in, this, _1));
+      set_msg_handler(pmt::mp("Input"), [this](auto&& arg) { return this->handle_msg_in(arg); });
       message_port_register_out(pmt::mp("Output"));
       message_port_register_out(pmt::mp("TX4k8"));
 
@@ -65,7 +63,7 @@ namespace gr {
        **************/
       timer = new boost::asio::deadline_timer(ios);
       timer->expires_from_now(boost::posix_time::milliseconds(500));
-      timer->async_wait(boost::bind(&tnc_b1_impl::output_module_id, this));
+      timer->async_wait([this](auto&& arg) { return this->output_module_id(); });
       thr = new boost::thread(&tnc_b1_impl::run_timer, this);
 
       // Init Message Buffer
@@ -264,7 +262,7 @@ namespace gr {
             gr_vector_const_void_star &input_items,
             gr_vector_void_star &output_items)
     {
-        const uint8_t *in = (const uint8_t *) input_items[0];
+        auto in = static_cast<const input_type*>(input_items[0]);
 
         // Main loop for Incoming bits
         for(int i=104; i<(noutput_items+104); ++i) {

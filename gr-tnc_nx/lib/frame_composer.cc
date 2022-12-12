@@ -31,8 +31,8 @@
 #include "config.h"
 #endif
 
-#include <tnc_nx/frame_composer.h>
-#include <tnc_nx/nx_protocol.h>
+#include <gnuradio/tnc_nx/frame_composer.h>
+#include <gnuradio/tnc_nx/nx_protocol.h>
 
 namespace gr {
   namespace tnc_nx {

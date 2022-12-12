@@ -25,7 +25,7 @@ outputs:
     vlen: 1
 
 templates:
-    imports: import tnc_nx
+    imports: from gnuradio import tnc_nx
     make: tnc_nx.split_modulator(gain=${gain})
     callbacks:
     - set_gain(${gain})

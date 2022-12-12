@@ -32,11 +32,13 @@
 namespace gr {
   namespace tnc_nx {
 
+using input_type = float;
+using output_type = float;
+
     local_extrema_detect::sptr
     local_extrema_detect::make(int hist, float threshold, float gain)
     {
-      return gnuradio::get_initial_sptr
-        (new local_extrema_detect_impl(hist, threshold, gain));
+        return gnuradio::make_block_sptr<local_extrema_detect_impl>(hist, threshold, gain);
     }
 
     // last output value
@@ -47,8 +49,8 @@ namespace gr {
      */
     local_extrema_detect_impl::local_extrema_detect_impl(int hist, float threshold, float range)
       : gr::block("local_extrema_detect",
-              gr::io_signature::make(1, 1, sizeof(float)),
-              gr::io_signature::make(1, 1, sizeof(float))),
+              gr::io_signature::make(1, 1, sizeof(input_type)),
+              gr::io_signature::make(1, 1, sizeof(output_type))),
               _hist(hist),
               _threshold(threshold),
               _gain(range)
@@ -71,8 +73,8 @@ namespace gr {
                        gr_vector_const_void_star &input_items,
                        gr_vector_void_star &output_items)
     {
-        const float *in = (const float *) input_items[0];
-        float *out = (float *) output_items[0];
+        auto in = static_cast<const input_type*>(input_items[0]);
+        auto out = static_cast<output_type*>(output_items[0]);
 
         float diff = 0;
 

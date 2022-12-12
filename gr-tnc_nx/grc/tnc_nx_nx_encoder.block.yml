@@ -18,7 +18,7 @@ outputs:
     optional: true
 
 templates:
-    imports: import tnc_nx
-    make: tnc_nx.nx_encoder()
+  imports: from gnuradio import tnc_nx
+  make: tnc_nx.nx_encoder()
 
 file_format: 1

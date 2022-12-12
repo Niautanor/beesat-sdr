@@ -18,7 +18,7 @@ outputs:
     id: TX4k8
 
 templates:
-    imports: import tnc_nx
+    imports: from gnuradio import tnc_nx
     make: tnc_nx.tnc_b1()
 
 file_format: 1
