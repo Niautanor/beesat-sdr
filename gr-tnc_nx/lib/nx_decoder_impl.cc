@@ -221,7 +221,7 @@ namespace gr {
               rx.save_head();
 
               // ACK REQUESTED
-              if (ack_bit(rx.cur.control)) {
+              if (d_beesat_mode && ack_bit(rx.cur.control)) {
                 if (!rx.errorcount) // NO Errors were detected
                   output_message(); // pass received message
 
