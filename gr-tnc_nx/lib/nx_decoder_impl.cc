@@ -81,30 +81,28 @@ namespace gr {
     }
 
     void nx_decoder_impl::output_message() {
-      int msg_len = (rx.org.blocks * 18) + 8 + (d_beesat_mode ? 8 : 0);
+      int msg_len = (rx.org.blocks * 18);
+
       // create output buffer
       pmt::pmt_t out_vector = pmt::make_u8vector(msg_len, 0);
       // make accessible pointer
       uint8_t* out = (uint8_t *) pmt::uniform_vector_writable_elements(out_vector, d_off);
 
-      *out++ = rx.org.control[0];
-      *out++ = rx.org.control[1];
+      pmt::pmt_t metadata = pmt::make_dict();
+      metadata = pmt::dict_add(metadata, pmt::string_to_symbol("ctrl0"), pmt::from_uint64(rx.org.control[0]));
+      metadata = pmt::dict_add(metadata, pmt::string_to_symbol("ctrl1"), pmt::from_uint64(rx.org.control[1]));
+      metadata = pmt::dict_add(metadata, pmt::string_to_symbol("msg_type"), pmt::from_uint64(rx.org.msg_type == T_DIGI ? BIT_DIG : BIT_MSG));
+      metadata = pmt::dict_add(metadata, pmt::string_to_symbol("errorcode"), pmt::init_u8vector(4, rx.errorcode));
+
       if (d_beesat_mode) {
-	for (int i = 0; i < 8; ++i)
-	  *out++ = rx.callsign[i];
+        metadata = pmt::dict_add(metadata, pmt::string_to_symbol("callsign"), pmt::init_u8vector(8, rx.callsign));
       }
+
       for (int k = 0; k < rx.org.blocks; ++k)
         for (int i = 0; i < 18; ++i)
           *out++ = rx.mob_data[k][i];
-      *out++ = 0xAA; // TEMP-DUMMY
-      for (int i = 0; i < 4; ++i)
-        *out++ = rx.errorcode[i];
-      *out++ = 0xBB; // SIG-QLTY-DUMMY
 
-      if (rx.org.msg_type == T_DIGI)
-        message_port_pub(pmt::mp("out"), pmt::cons(pmt::from_uint64((uint64_t) BIT_DIG), out_vector));
-      else
-        message_port_pub(pmt::mp("out"), pmt::cons(pmt::from_uint64((uint64_t) BIT_MSG), out_vector));
+      message_port_pub(pmt::mp("out"), pmt::cons(metadata, out_vector));
     }
 
     void nx_decoder_impl::output_trigger() {
