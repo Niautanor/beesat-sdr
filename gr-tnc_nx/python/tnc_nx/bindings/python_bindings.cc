@@ -26,6 +26,7 @@ namespace py = pybind11;
     void bind_nx_decoder(py::module& m);
     void bind_tnc_b1(py::module& m);
     void bind_local_extrema_detect(py::module& m);
+    void bind_gos_encoder(py::module& m);
 // ) END BINDING_FUNCTION_PROTOTYPES
 
 
@@ -59,5 +60,6 @@ PYBIND11_MODULE(tnc_nx_python, m)
     bind_nx_decoder(m);
     bind_tnc_b1(m);
     bind_local_extrema_detect(m);
+    bind_gos_encoder(m);
     // ) END BINDING_FUNCTION_CALLS
 }

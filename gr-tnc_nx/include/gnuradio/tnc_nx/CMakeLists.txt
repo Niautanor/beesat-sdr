@@ -32,6 +32,6 @@ install(FILES
     tnc_b1.h 
     b1_protocol.h
     local_extrema_detect.h
-    gscf_com.h 
-    DESTINATION include/gnuradio/tnc_nx
+    gscf_com.h
+    gos_encoder.h DESTINATION include/gnuradio/tnc_nx
 )

@@ -27,5 +27,5 @@ install(FILES
     tnc_nx_split_modulator.block.yml
     tnc_nx_local_extrema_detect.block.yml
     tnc_nx_beesat_classifier.block.yml
-    DESTINATION share/gnuradio/grc/blocks
+    tnc_nx_gos_encoder.block.yml DESTINATION share/gnuradio/grc/blocks
 )

@@ -33,7 +33,8 @@ list(APPEND tnc_nx_python_files
     nx_encoder_python.cc
     nx_decoder_python.cc
     tnc_b1_python.cc
-    local_extrema_detect_python.cc python_bindings.cc)
+    local_extrema_detect_python.cc
+    gos_encoder_python.cc python_bindings.cc)
 
 GR_PYBIND_MAKE_OOT(tnc_nx
    ../../..

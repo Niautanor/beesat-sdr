@@ -33,6 +33,7 @@ list(APPEND tnc_nx_sources
     nx_decoder_impl.cc
     tnc_b1_impl.cc
     gscf_com.cc
+    gos_encoder_impl.cc
 )
 
 set(tnc_nx_sources "${tnc_nx_sources}" PARENT_SCOPE)
