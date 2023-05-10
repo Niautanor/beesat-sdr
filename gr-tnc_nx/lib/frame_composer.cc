@@ -59,7 +59,7 @@ namespace gr {
   	if(bit>0)
   		return 1;
   	else
-  		return (-1);
+  		return 0;
   }
 
   /*
