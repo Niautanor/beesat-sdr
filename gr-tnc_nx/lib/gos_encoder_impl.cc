@@ -113,8 +113,7 @@ void gos_encoder_impl::transmit_msg(pmt::pmt_t meta)
 
     // **** ASSEMBLE MESSAGE 4k8 **** //
     count += fr.write_sync(&out_1[count]);
-    // TODO: extend write_header to allow specifying the frame sync pattern to write (0x5765)
-    count += fr.write_header(&out_1[count]);
+    count += fr.write_header(&out_1[count], 0x5765);
     count += fr.write_data(&out_1[count]);
     count += fr.write_hangbytes(&out_1[count]);
 

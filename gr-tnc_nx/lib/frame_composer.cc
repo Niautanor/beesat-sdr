@@ -74,9 +74,11 @@ namespace gr {
   }
 
   // header bytes (2 framesync bytes, 2 control and 1 control fec)
-  int	frame_composer::write_header(int8_t *buf){
+  int	frame_composer::write_header(int8_t *buf, uint16_t frame_sync){
+    if (!frame_sync)
+      frame_sync = FRAMESYNC;
   	for(int i=0; i<16; ++i)
-			buf[i] = con(FRAMESYNC>>(15-i) & 0x0001);			// FRAME SYNC
+			buf[i] = con(frame_sync>>(15-i) & 0x0001);			// FRAME SYNC
 		for(int i=0; i<8; ++i)
 			buf[i+16] = con(mob->cur.control[0]>>(7-i) & 0x01);		// CTRL 0
 		for(int i=0; i<8; ++i)

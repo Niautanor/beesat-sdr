@@ -54,7 +54,7 @@ namespace gr {
     	~frame_composer();
 
     	int write_sync(int8_t *buf);
-    	int write_header(int8_t *buf);
+    	int write_header(int8_t *buf, uint16_t frame_sync = 0);
     	int write_callsign(int8_t *buf);
     	int write_data(int8_t *buf);
     	int write_ec(int8_t *buf);
